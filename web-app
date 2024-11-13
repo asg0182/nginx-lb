@@ -1,0 +1,8 @@
+FROM python:3.12-alpine3.19
+
+WORKDIR /app
+RUN pip install flask
+COPY app.py /app/
+
+ENTRYPOINT ["flask", "run"]
+CMD ["--host=0.0.0.0"]

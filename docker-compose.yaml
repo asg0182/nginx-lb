@@ -1,0 +1,47 @@
+services:
+  nginxlb:
+    build:
+      context: .
+      dockerfile: nginx-lb
+    ports:
+    - "8111:80"
+    container_name: nginx-lb
+    depends_on:
+    - webred
+    - webgreen
+    - webblue
+    networks:
+    - apps
+
+  webred:
+    build:
+      context: .
+      dockerfile: web-app
+    environment:
+      COLOR: "red"
+    container_name: webred
+    networks:
+    - apps
+
+  webgreen:
+    build:
+      context: .
+      dockerfile: web-app
+    environment:
+      COLOR: "green"
+    container_name: webgreen
+    networks:
+    - apps
+
+  webblue:
+    build:
+      context: .
+      dockerfile: web-app
+    environment:
+      COLOR: "blue"
+    container_name: webblue
+    networks:
+    - apps
+
+networks:
+  apps:
